@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BlockTalk — Proximity Voicechat</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      color: #f4f4f4;
+      background: #171b20;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    main {
+      width: 100%;
+      max-width: 480px;
+      background: #242b32;
+      border: 2px solid #414b54;
+      border-radius: 14px;
+      padding: 28px;
+      box-shadow: 0 12px 35px #0006;
+    }
+
+    .logo {
+      font-size: 44px;
+      text-align: center;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .intro {
+      color: #c3ccd3;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    label {
+      display: block;
+      margin: 20px 0 8px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border-radius: 7px;
+      border: 1px solid #65727d;
+      background: #151a1f;
+      color: white;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 24px;
+      border: 0;
+      border-radius: 7px;
+      background: #58a846;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover { background: #6abd55; }
+
+    #message {
+      margin-top: 18px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .note {
+      margin-top: 22px;
+      font-size: 13px;
+      color: #aeb8c0;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="logo">🟩🎙️</div>
+    <h1>BlockTalk</h1>
+    <p class="intro">
+      Proximity voicechat voor jouw Minecraft Bedrock Hunger Games.
+      Koppel straks je account en praat met spelers in de buurt.
+    </p>
+
+    <form id="linkForm">
+      <label for="minecraft">Minecraft-gamertag</label>
+      <input id="minecraft" name="minecraft"
+        maxlength="32" required
+        placeholder="Bijvoorbeeld BigPotato">
+
+      <label for="discord">Discord-gebruikersnaam</label>
+      <input id="discord" name="discord"
+        maxlength="64" required
+        placeholder="Je Discord-naam">
+
+      <button type="submit">Accountgegevens controleren</button>
+    </form>
+
+    <p id="message" role="status"></p>
+
+    <p class="note">
+      Prototype: deze pagina controleert alleen of de velden zijn ingevuld.
+      Je account is nog niet gekoppeld en er wordt nog geen audio verstuurd.
+      Deel nooit je wachtwoord of Discord-inlogcode.
+    </p>
+  </main>
+
+  <script>
+    const form = document.getElementById("linkForm");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const minecraft = document
+        .getElementById("minecraft").value.trim();
+      const discord = document
+        .getElementById("discord").value.trim();
+
+      if (!minecraft || !discord) {
+        message.textContent = "Vul beide velden in.";
+        return;
+      }
+
+      message.textContent =
+        "Gelukt! De gegevens zijn ingevuld voor Minecraft: " +
+        minecraft +
+        ". De echte Discord-koppeling bouwen we in een volgende stap.";
+
+      message.style.color = "#9be58b";
+    });
+  </script>
+</body>
+</html>
